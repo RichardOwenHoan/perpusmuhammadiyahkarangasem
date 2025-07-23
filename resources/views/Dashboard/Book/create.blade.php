@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -93,7 +93,7 @@
 
                         <div class="form-group">
                             <label for="category_ids">Kategori</label>
-                            <select class="js-example-basic-multiple w-100" id="category_ids" name="category_ids[]" multiple="multiple" data-width="100%" required>
+                            <select class="js-example-basic-multiple w-100" id="category_ids" name="category_ids[]" data-width="100%" required>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}" {{ (old('category_ids') && in_array($category->id, old('category_ids'))) ? 'selected' : '' }}>
                                         {{ $category->name }}
@@ -101,7 +101,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        
+
                         <div class="form-group mt-4">
                             <button type="submit" class="btn btn-primary">Simpan</button>
                             <a href="{{ route('books.index') }}" class="btn btn-secondary">Batal</a>

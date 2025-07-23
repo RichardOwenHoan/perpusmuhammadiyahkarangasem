@@ -31,10 +31,10 @@ class BookController extends Controller
             });
         }
 
-        // // Filter berdasarkan tahun terbit
-        // if ($request->filled('tahun')) {
-        //     $query->where('tahun_terbit', $request->tahun);
-        // }
+        // Filter berdasarkan tahun terbit
+        if ($request->filled('tahun')) {
+            $query->where('tahun_terbit', $request->tahun);
+        }
 
         // // Filter berdasarkan kondisi buku
         // if ($request->filled('kondisi')) {

@@ -18,7 +18,7 @@
     <table>
         <thead>
             <tr>
-                <th>ID</th>
+                <th>No</th>
                 <th>Judul Buku</th>
                 <th>Nama Peminjam</th>
                 <th>Tanggal Pinjam</th>
@@ -37,9 +37,9 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($loans as $loan)
+            @foreach($loans as $index => $loan)
                 <tr>
-                    <td>{{ $loan->id }}</td>
+                    <td>{{ $index + 1 }}</td>
                     <td>{{ $loan->book->judul ?? '-' }}</td>
                     <td>{{ $loan->user->name ?? '-' }}</td>
                     <td class="nowrap">{{ $loan->loan_date ? \Carbon\Carbon::parse($loan->loan_date)->format('d M Y') : "-" }}</td>

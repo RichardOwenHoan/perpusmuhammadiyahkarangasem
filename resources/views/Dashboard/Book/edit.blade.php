@@ -99,7 +99,7 @@
 
                         <div class="form-group">
                             <label for="category_ids">Kategori</label>
-                            <select class="js-example-basic-multiple w-100" id="category_ids" name="category_ids[]" multiple="multiple" data-width="100%" required>
+                            <select class="js-example-basic-multiple w-100" id="category_ids" name="category_ids[]" data-width="100%" required>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}"
                                         {{ (old('category_ids') && in_array($category->id, old('category_ids'))) ||

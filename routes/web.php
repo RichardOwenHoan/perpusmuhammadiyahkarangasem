@@ -27,11 +27,13 @@ Route::get('/dashboard', function () {
     return redirect('/dashboard/books');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth','admin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('/dashboard/books', DB_BookController::class);
     Route::resource('/dashboard/loans', LoanController::class)->names('dashboard.loans');
     Route::get('/dashboard/loans/data/exports', [LoanController::class, 'export'])->name('dashboard.loans.export');

@@ -7,7 +7,7 @@
     .custom-slider .tp-caption {
         text-align: center;
     }
-    
+
     /* Style untuk bagian tentang sekolah */
     .about-preview-section {
         background-color: #f8f9fa;
@@ -15,7 +15,7 @@
         position: relative;
         overflow: hidden;
     }
-    
+
     .about-preview-section::before {
         content: '';
         position: absolute;
@@ -26,52 +26,52 @@
         background: url('{{ asset('LP/upload/pattern-bg.png') }}') repeat;
         opacity: 0.1;
     }
-    
+
     .about-preview-content {
         display: flex;
         align-items: center;
     }
-    
+
     .about-preview-image {
         flex: 0 0 45%;
         position: relative;
     }
-    
+
     .about-preview-image img {
         border-radius: 10px;
         box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         transition: all 0.3s ease;
     }
-    
+
     .about-preview-image:hover img {
         transform: translateY(-8px);
         box-shadow: 0 20px 35px rgba(0,0,0,0.2);
     }
-    
+
     .about-preview-text {
         flex: 0 0 55%;
         padding-left: 50px;
     }
-    
+
     .about-preview-title {
         position: relative;
         padding-bottom: 15px;
         margin-bottom: 25px;
     }
-    
+
     .about-preview-title h4 {
         font-size: 18px;
         color: #0d6efd;
         font-weight: 600;
         margin-bottom: 10px;
     }
-    
+
     .about-preview-title h2 {
         font-size: 32px;
         font-weight: 700;
         color: #333;
     }
-    
+
     .about-preview-title::after {
         content: '';
         position: absolute;
@@ -81,7 +81,7 @@
         height: 3px;
         background: #0d6efd;
     }
-    
+
     .vision-mission-box {
         background: #fff;
         border-radius: 10px;
@@ -90,12 +90,12 @@
         box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         transition: all 0.3s ease;
     }
-    
+
     .vision-mission-box:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     }
-    
+
     .vision-mission-box h3 {
         font-size: 20px;
         font-weight: 600;
@@ -104,22 +104,22 @@
         display: flex;
         align-items: center;
     }
-    
+
     .vision-mission-box h3 i {
         margin-right: 10px;
         color: #0d6efd;
         font-size: 24px;
     }
-    
+
     .vision-mission-box p {
         color: #666;
         line-height: 1.6;
     }
-    
+
     .about-cta {
         margin-top: 30px;
     }
-    
+
     .btn-about {
         padding: 12px 30px;
         border-radius: 30px;
@@ -130,24 +130,24 @@
         text-decoration: none;
         display: inline-block;
     }
-    
+
     .btn-about:hover {
         background: #0a58ca;
         color: #fff;
         transform: translateY(-3px);
         box-shadow: 0 10px 20px rgba(13, 110, 253, 0.2);
     }
-    
+
     @media (max-width: 991px) {
         .about-preview-content {
             flex-direction: column;
         }
-        
+
         .about-preview-image {
             flex: 0 0 100%;
             margin-bottom: 30px;
         }
-        
+
         .about-preview-text {
             flex: 0 0 100%;
             padding-left: 0;
@@ -167,137 +167,137 @@
                 <li data-index="rs-672" data-transition="fade" data-slotamount="default" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="{{ asset('LP/upload/slider/slider-image-1.jpg') }}" data-rotate="0" data-saveperformance="off" data-title="unique" data-description="">
                     <!-- MAIN IMAGE -->
                     <img src="{{ asset('sekolah.jpg') }}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
-                    
+
                     <!-- LAYERS -->
                     <div class="tp-caption tp-shape tp-shapewrapper tp-resizeme"
-                        id="slide-672-layer-1" 
-                        data-x="['left','left','left','left']" 
-                        data-hoffset="['0','0','0','0']" 
-                        data-y="['top','top','top','top']" 
-                        data-voffset="['130','130','130','130']" 
-                        data-width="['530','530','430','420']" 
-                        data-height="330" 
-                        data-whitespace="nowrap" 
-                        data-transform_idle="o:1;" 
+                        id="slide-672-layer-1"
+                        data-x="['left','left','left','left']"
+                        data-hoffset="['0','0','0','0']"
+                        data-y="['top','top','top','top']"
+                        data-voffset="['130','130','130','130']"
+                        data-width="['530','530','430','420']"
+                        data-height="330"
+                        data-whitespace="nowrap"
+                        data-transform_idle="o:1;"
                         data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeOut;"
                         style="z-index: 5;background-color:rgba(255, 255, 255, 1.00);border-color:rgba(0, 0, 0, 0);">
                     </div>
 
-                    <div class="tp-caption Woo-TitleLarge tp-resizeme" 
-                        id="slide-672-layer-2" 
-                        data-x="['left','left','left','left']" 
-                        data-hoffset="['40','40','40','35']" 
-                        data-y="['top','top','top','top']" 
-                        data-voffset="['170','170','170','170']" 
-                        data-width="450" 
-                        data-height="none" 
-                        data-whitespace="normal" 
-                        data-transform_idle="o:1;" 
+                    <div class="tp-caption Woo-TitleLarge tp-resizeme"
+                        id="slide-672-layer-2"
+                        data-x="['left','left','left','left']"
+                        data-hoffset="['40','40','40','35']"
+                        data-y="['top','top','top','top']"
+                        data-voffset="['170','170','170','170']"
+                        data-width="450"
+                        data-height="none"
+                        data-whitespace="normal"
+                        data-transform_idle="o:1;"
                         data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeOut;"
                         data-start="1000"
                         style="z-index: 6; min-width: 370px; max-width: 450px; white-space: normal;text-align:left;">
                         Perpustakaan Buku Kami
                     </div>
 
-                    <div class="tp-caption Woo-Rating tp-resizeme" 
-                        id="slide-672-layer-4" 
-                        data-x="['left','left','left','left']" 
-                        data-hoffset="['40','40','40','35']" 
-                        data-y="['top','top','top','top']" 
-                        data-voffset="['286','286','286','286']" 
-                        data-width="450" 
-                        data-height="none" 
-                        data-whitespace="normal" 
-                        data-transform_idle="o:1;" 
+                    <div class="tp-caption Woo-Rating tp-resizeme"
+                        id="slide-672-layer-4"
+                        data-x="['left','left','left','left']"
+                        data-hoffset="['40','40','40','35']"
+                        data-y="['top','top','top','top']"
+                        data-voffset="['286','286','286','286']"
+                        data-width="450"
+                        data-height="none"
+                        data-whitespace="normal"
+                        data-transform_idle="o:1;"
                         data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeOut;"
                         data-start="1500"
                         style="z-index: 8; min-width: 370px; max-width: 450px; white-space: normal; text-align:left;">
                         Akses ribuan buku digital dan cetak untuk mendukung pembelajaran dan literasi siswa.
                     </div>
 
-                    <a class="tp-caption Woo-ProductInfo rev-btn tp-resizeme" 
-                        href="{{ route('landing.books') }}" 
-                        target="_self" 
-                        id="slide-672-layer-6" 
-                        data-x="['left','left','left','left']" 
-                        data-hoffset="['40','40','40','35']" 
-                        data-y="['top','top','top','top']" 
-                        data-voffset="['370','370','370','370']" 
-                        data-width="none" 
-                        data-height="none" 
-                        data-whitespace="nowrap" 
-                        data-transform_idle="o:1;" 
+                    <a class="tp-caption Woo-ProductInfo rev-btn tp-resizeme"
+                        href="{{ route('landing.books') }}"
+                        target="_self"
+                        id="slide-672-layer-6"
+                        data-x="['left','left','left','left']"
+                        data-hoffset="['40','40','40','35']"
+                        data-y="['top','top','top','top']"
+                        data-voffset="['370','370','370','370']"
+                        data-width="none"
+                        data-height="none"
+                        data-whitespace="nowrap"
+                        data-transform_idle="o:1;"
                         data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeOut;"
                         data-start="2000"
                         style="z-index: 10;">
                         Jelajahi Koleksi
                     </a>
                 </li>
-                
+
                 <!-- SLIDE 2 -->
                 <li data-index="rs-673" data-transition="fade" data-slotamount="default" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="{{ asset('LP/upload/slider/slider-image-2.jpg') }}" data-rotate="0" data-saveperformance="off" data-title="ideas" data-description="">
                     <!-- MAIN IMAGE -->
                     <img src="{{ asset('sekolah2.jpg') }}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
-                    
+
                     <!-- LAYERS -->
                     <div class="tp-caption tp-shape tp-shapewrapper tp-resizeme"
-                        id="slide-673-layer-1" 
-                        data-x="['left','left','left','left']" 
-                        data-hoffset="['0','0','0','0']" 
-                        data-y="['top','top','top','top']" 
-                        data-voffset="['130','130','130','130']" 
-                        data-width="['530','530','430','420']" 
-                        data-height="330" 
-                        data-whitespace="nowrap" 
-                        data-transform_idle="o:1;" 
+                        id="slide-673-layer-1"
+                        data-x="['left','left','left','left']"
+                        data-hoffset="['0','0','0','0']"
+                        data-y="['top','top','top','top']"
+                        data-voffset="['130','130','130','130']"
+                        data-width="['530','530','430','420']"
+                        data-height="330"
+                        data-whitespace="nowrap"
+                        data-transform_idle="o:1;"
                         data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeOut;"
                         style="z-index: 5;background-color:rgba(255, 255, 255, 1.00);border-color:rgba(0, 0, 0, 0);">
                     </div>
 
-                    <div class="tp-caption Woo-TitleLarge tp-resizeme" 
-                        id="slide-673-layer-2" 
-                        data-x="['left','left','left','left']" 
-                        data-hoffset="['40','40','40','35']" 
-                        data-y="['top','top','top','top']" 
-                        data-voffset="['170','170','170','170']" 
-                        data-width="450" 
-                        data-height="none" 
-                        data-whitespace="normal" 
-                        data-transform_idle="o:1;" 
+                    <div class="tp-caption Woo-TitleLarge tp-resizeme"
+                        id="slide-673-layer-2"
+                        data-x="['left','left','left','left']"
+                        data-hoffset="['40','40','40','35']"
+                        data-y="['top','top','top','top']"
+                        data-voffset="['170','170','170','170']"
+                        data-width="450"
+                        data-height="none"
+                        data-whitespace="normal"
+                        data-transform_idle="o:1;"
                         data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeOut;"
                         data-start="1000"
                         style="z-index: 6; min-width: 370px; max-width: 450px; white-space: normal;text-align:left;">
                         Peminjaman Buku<br>Mudah dan Cepat
                     </div>
 
-                    <div class="tp-caption Woo-Rating tp-resizeme" 
-                        id="slide-673-layer-4" 
-                        data-x="['left','left','left','left']" 
-                        data-hoffset="['40','40','40','35']" 
-                        data-y="['top','top','top','top']" 
-                        data-voffset="['286','286','286','286']" 
-                        data-width="450" 
-                        data-height="none" 
-                        data-whitespace="normal" 
-                        data-transform_idle="o:1;" 
+                    <div class="tp-caption Woo-Rating tp-resizeme"
+                        id="slide-673-layer-4"
+                        data-x="['left','left','left','left']"
+                        data-hoffset="['40','40','40','35']"
+                        data-y="['top','top','top','top']"
+                        data-voffset="['286','286','286','286']"
+                        data-width="450"
+                        data-height="none"
+                        data-whitespace="normal"
+                        data-transform_idle="o:1;"
                         data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeOut;"
                         data-start="1500"
                         style="z-index: 8; min-width: 370px; max-width: 450px; white-space: normal; text-align:left;">
                         Sistem peminjaman dan pengembalian buku yang terintegrasi memudahkan akses ke pengetahuan.
                     </div>
 
-                    <a class="tp-caption Woo-ProductInfo rev-btn tp-resizeme" 
-                    href="{{ route('landing.books') }}" 
-                    target="_self" 
-                    id="slide-672-layer-6" 
-                    data-x="['left','left','left','left']" 
-                    data-hoffset="['40','40','40','35']" 
-                    data-y="['top','top','top','top']" 
-                    data-voffset="['370','370','370','370']" 
-                    data-width="none" 
-                    data-height="none" 
-                    data-whitespace="nowrap" 
-                    data-transform_idle="o:1;" 
+                    <a class="tp-caption Woo-ProductInfo rev-btn tp-resizeme"
+                    href="{{ route('landing.books') }}"
+                    target="_self"
+                    id="slide-672-layer-6"
+                    data-x="['left','left','left','left']"
+                    data-hoffset="['40','40','40','35']"
+                    data-y="['top','top','top','top']"
+                    data-voffset="['370','370','370','370']"
+                    data-width="none"
+                    data-height="none"
+                    data-whitespace="nowrap"
+                    data-transform_idle="o:1;"
                     data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeOut;"
                     data-start="2000"
                     style="z-index: 10;">
@@ -606,19 +606,19 @@
                     <h4>Selamat Datang di</h4>
                     <h2>SMP Muhammadiyah Karang Asem</h2>
                 </div>
-                
+
                 <p>SMP Muhammadiyah Karang Asem adalah lembaga pendidikan Islam yang berdedikasi untuk membentuk generasi muslim yang berakhlak mulia, cerdas dan berwawasan luas. Didirikan pada tahun 1978, sekolah kami telah berkontribusi dalam mencerdaskan kehidupan bangsa selama lebih dari empat dekade.</p>
-                
+
                 <div class="vision-mission-box">
                     <h3><i class="fa fa-eye"></i> Visi</h3>
                     <p>Menjadi pusat pendidikan Islam terkemuka yang menghasilkan lulusan beriman, bertaqwa, berakhlak mulia, dan unggul dalam prestasi akademik maupun non-akademik.</p>
                 </div>
-                
+
                 <div class="vision-mission-box">
                     <h3><i class="fa fa-bullseye"></i> Misi</h3>
                     <p>Menyelenggarakan pendidikan Islam berkualitas, membina karakter dan akhlak mulia, serta mengembangkan potensi peserta didik melalui pembelajaran inovatif dan kreatif.</p>
                 </div>
-                
+
                 {{--  <div class="about-cta">
                     <a href="{{ route('landing.about') }}" class="btn-about">Selengkapnya <i class="fa fa-arrow-right ml-2"></i></a>
                 </div>  --}}
@@ -647,7 +647,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="item">
                     <div class="testimonial-post">
                         <p>"Sebagai guru, saya merasa terbantu dengan adanya perpustakaan digital ini. Siswa lebih mudah mengakses sumber belajar dan membantu meningkatkan minat baca mereka."</p>
@@ -662,7 +662,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="item">
                     <div class="testimonial-post">
                         <p>"Sistem peminjaman buku yang cepat dan mudah membuat saya senang berkunjung ke perpustakaan. Staf perpustakaannya juga sangat membantu dan ramah."</p>
