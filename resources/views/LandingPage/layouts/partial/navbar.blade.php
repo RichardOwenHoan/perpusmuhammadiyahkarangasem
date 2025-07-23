@@ -64,6 +64,16 @@
                                 <hr class="dropdown-divider">
                             </li>
                             {{-- <li><strong class="dropdown-header">Kategori Buku</strong></li> --}}
+                            <li>
+                                <a
+                                    href="{{ route('landing.books') }}?sortBy=created_at&sortDirection=desc">Buku
+                                    Terbaru</a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="{{ route('landing.books') }}?sortBy=stok&sortDirection=asc">Buku Populer</a>
+                            </li>
                             <li><a href="{{ route('landing.books') }}">Semua Kategori</a></li>
                             @foreach ($navbarCategories as $category)
                                 <li><a
@@ -76,6 +86,8 @@
                         <a class="nav-link {{ request()->routeIs('landing.about') ? 'active' : '' }}"
                             href="{{ route('landing.about') }}">Tentang Kami</a>
                     </li>
+
+
                     @auth
                         @if (auth()->user()->isSiswa())
                             <li class="nav-item">
@@ -106,15 +118,18 @@
                                                 style="width: 30px; height: 30px; border-radius: 50%;">
                                         @endif
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="profileDropdown" style="right: -100px; left: auto; transform: translateX(5px);">
+                                    <div class="dropdown-menu" aria-labelledby="profileDropdown"
+                                        style="right: -100px; left: auto; transform: translateX(5px);">
                                         <div class="dropdown-header d-flex flex-column align-items-center">
                                             <div class="figure mb-3">
                                                 @if (Auth::user()->gambar == null)
                                                     <img src="/DB/assets/images/admin/0.png"
-                                                        style="width: 30px; height: 30px; border-radius: 50%;" alt="">
+                                                        style="width: 30px; height: 30px; border-radius: 50%;"
+                                                        alt="">
                                                 @else
                                                     <img src="{{ asset('storage/' . Auth::user()->gambar) }}"
-                                                        style="width: 30px; height: 30px; border-radius: 50%;" alt="profile">
+                                                        style="width: 30px; height: 30px; border-radius: 50%;"
+                                                        alt="profile">
                                                 @endif
                                             </div>
                                             <div class="info text-center">
@@ -215,17 +230,19 @@
                     <nav class="navbar" style="background: #212529 !important">
                         <ul class="navbar-nav">
                             <li class="nav-item dropdownx nav-profile">
-                                <a class="nav-link dropdown-toggle" href="#" id="profileDropdownMobile" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" id="profileDropdownMobile"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     @if (Auth::user()->gambar == null)
                                         <img src="/DB/assets/images/admin/0.png"
-                                            style="width: 30px; height: 30px; border-radius: 50%; background: white !important" alt="">
+                                            style="width: 30px; height: 30px; border-radius: 50%; background: white !important"
+                                            alt="">
                                     @else
                                         <img src="{{ asset('storage/' . Auth::user()->gambar) }}" alt="profile"
                                             style="width: 30px; height: 30px; border-radius: 50%; background: white !important">
                                     @endif
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="profileDropdownMobile" style="right: -100px; left: auto; transform: translateX(5px);">
+                                <div class="dropdown-menu" aria-labelledby="profileDropdownMobile"
+                                    style="right: -100px; left: auto; transform: translateX(5px);">
                                     <div class="dropdown-header d-flex flex-column align-items-center">
                                         <div class="figure mb-3">
                                             @if (Auth::user()->gambar == null)
