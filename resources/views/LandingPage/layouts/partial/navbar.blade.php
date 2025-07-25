@@ -45,6 +45,14 @@
                     alt="Perpustakaan SMP Muhammadiyah">
             </a>
 
+            @auth
+                <div class="navbar-brand d-block d-lg-none" style="margin-right: 0px;">
+                    <h3 class="text-dark" style="margin-right: 0px; margin-top: 10px;">
+                        Selamat Datang, {{ auth()->user()->name }}
+                    </h3>
+                </div>
+            @endauth
+
             <a href="#" class="mobile-nav-toggle">
                 <span></span>
             </a>
