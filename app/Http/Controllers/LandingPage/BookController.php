@@ -12,7 +12,7 @@ class BookController extends Controller
     public function index(Request $request)
     {
         // Query dasar
-        $query = Book::query();
+        $query = Book::where('archived', false);
 
         // Filter berdasarkan kategori jika ada
         if ($request->filled('category')) {

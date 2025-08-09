@@ -292,7 +292,7 @@
             <li><a href="{{ route('landing.books') }}">Daftar Buku</a></li>
             <li>{{ $book->judul }}</li>
         </ul>
-        
+
         <!-- Flash Messages -->
         @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -300,28 +300,33 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
-        
+
         @if(session('error'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             {{ session('error') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
-        
+
         <h1 class="book-title">{{ $book->judul }}</h1>
-        
+
         <div class="row">
             <div class="col-md-4">
                 <div class="book-image-container">
                     @if($book->gambar)
-                        <img src="{{ asset('storage/' . $book->gambar) }}" 
+                        <img src="{{ asset('storage/' . $book->gambar) }}"
                             alt="{{ $book->judul }}" class="book-image">
                     @else
-                        <img src="{{ asset('LP/default-book.png') }}" 
+                        <img src="{{ asset('LP/default-book.png') }}"
                             alt="{{ $book->judul }}" class="book-image">
                     @endif
                 </div>
-                
+
+                @if ($book->archived)
+                    <div class="alert alert-warning" role="alert">
+                        <i class="fa fa-exclamation-triangle"></i> Buku ini telah dihapus dan tidak tersedia untuk peminjaman.
+                    </div>
+                @else
                 <div class="text-center">
                     @if($book->stok > 0)
                         <div class="availability-badge available">
@@ -342,11 +347,11 @@
                                     ->whereIn('status_peminjaman', ['dipinjam', 'diperpanjang'])
                                     ->first();
                             @endphp
-                            
+
                             @if($existingLoan)
                                 <button class="button-one btn-pinjam" disabled>Sudah Meminjam Buku Lain</button>
                                 <div class="alert alert-info alert-info-loan" role="alert">
-                                    <i class="fa fa-info-circle"></i> Anda sudah meminjam buku: <strong>{{ $existingLoan->book->judul }}</strong>. 
+                                    <i class="fa fa-info-circle"></i> Anda sudah meminjam buku: <strong>{{ $existingLoan->book->judul }}</strong>.
                                     Kembalikan buku tersebut terlebih dahulu untuk dapat meminjam buku lain.
                                 </div>
                             @elseif($book->stok > 0)
@@ -364,8 +369,9 @@
                         <a href="{{ route('login') }}" class="button-one btn-pinjam">Login untuk Pinjam</a>
                     @endauth
                 </div>
+                @endif
             </div>
-            
+
             <div class="col-md-8">
                 <div class="book-details">
                     <div class="book-detail-row">
@@ -399,7 +405,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 @if($book->intisari)
                     <div class="book-description">
                         <h3>Deskripsi</h3>
@@ -410,11 +416,11 @@
                 @endif
             </div>
         </div>
-        
+
         <!-- Related Books -->
         <div class="related-books">
             <h3>Buku Terkait</h3>
-            
+
             @if($relatedBooks->count() > 0)
                 <div class="related-books-container">
                     <div class="row">
@@ -431,12 +437,12 @@
                                                 <i class="fa fa-times-circle"></i> Habis
                                             </div>
                                         @endif
-                                        
+
                                         @if($relatedBook->gambar)
-                                            <img src="{{ asset('storage/' . $relatedBook->gambar) }}" 
+                                            <img src="{{ asset('storage/' . $relatedBook->gambar) }}"
                                                 class="related-book-image" alt="{{ $relatedBook->judul }}">
                                         @else
-                                            <img src="{{ asset('LP/default-book.png') }}" 
+                                            <img src="{{ asset('LP/default-book.png') }}"
                                                 class="related-book-image" alt="{{ $relatedBook->judul }}">
                                         @endif
                                     </div>
@@ -445,7 +451,7 @@
                                         <p class="related-book-author">
                                             <i class="fa fa-user-edit"></i> {{ Str::limit($relatedBook->pengarang, 25) }}
                                         </p>
-                                        <a href="{{ route('landing.books.show', $relatedBook->id) }}" 
+                                        <a href="{{ route('landing.books.show', $relatedBook->id) }}"
                                            class="btn btn-primary related-book-btn">
                                             <i class="fa fa-eye"></i> Lihat Detail
                                         </a>
@@ -465,4 +471,4 @@
     </div>
 </section>
 <!-- End detail buku section -->
-@endsection 
+@endsection

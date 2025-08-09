@@ -26,6 +26,7 @@ class Book extends Model
         'stok',
         'intisari',
         'kondisi',
+        'archived',
     ];
 
     /**

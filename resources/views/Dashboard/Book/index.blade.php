@@ -57,7 +57,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
                                         @if($book->gambar)
-                                            <img src="{{ asset('storage/' . $book->gambar) }}" alt="{{ $book->judul }}" 
+                                            <img src="{{ asset('storage/' . $book->gambar) }}" alt="{{ $book->judul }}"
                                                 style="width: 60px; height: 60px; object-fit: cover;" class="img-thumbnail">
                                         @else
                                             <span class="badge bg-light text-dark">Tidak ada gambar</span>
@@ -73,8 +73,8 @@
                                     <td>{{ $book->categories->pluck('name')->implode(', ') }}</td>
                                     <td>
                                         <a href="{{ route('books.edit', $book->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" 
-                                            data-id="{{ $book->id }}" 
+                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal"
+                                            data-id="{{ $book->id }}"
                                             data-judul="{{ $book->judul }}">
                                             Hapus
                                         </button>
@@ -125,10 +125,10 @@
             const button = $(event.relatedTarget);
             const id = button.data('id');
             const judul = button.data('judul');
-            
+
             const modal = $(this);
             modal.find('#judulBuku').text(judul);
-            
+
             // Set action URL form delete
             const deleteUrl = "{{ route('books.destroy', ':id') }}".replace(':id', id);
             modal.find('#deleteForm').attr('action', deleteUrl);

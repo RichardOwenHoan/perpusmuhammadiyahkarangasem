@@ -16,7 +16,9 @@ class DB_BookController extends Controller
      */
     public function index(Request $request)
     {
-        $books = Book::with('categories')->get();
+        $books = Book::with('categories')
+            ->where('archived', 0)
+            ->get();
 
         return view('Dashboard.Book.index', compact('books'));
     }
@@ -36,7 +38,7 @@ class DB_BookController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'judul' => 'required|string|max:255',
+            'judul' => 'required|string|max:255|unique:books,judul',
             'kode_buku' => 'required|string|max:255|unique:books',
             'pengarang' => 'required|string|max:255',
             'penerbit' => 'required|string|max:255',
@@ -49,6 +51,7 @@ class DB_BookController extends Controller
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
             'judul.required' => 'Judul buku wajib diisi.',
+            'judul.unique' => 'Judul buku sudah ada.',
             'judul.string' => 'Judul buku harus berupa teks.',
             'judul.max' => 'Judul buku tidak boleh lebih dari 255 karakter.',
             'kode_buku.required' => 'Kode buku wajib diisi.',
@@ -127,7 +130,7 @@ class DB_BookController extends Controller
     public function update(Request $request, Book $book)
     {
         $validator = Validator::make($request->all(), [
-            'judul' => 'required|string|max:255',
+            'judul' => 'required|string|max:255|unique:books,judul,' . $book->id,
             'kode_buku' => 'required|string|max:255|unique:books,kode_buku,' . $book->id,
             'pengarang' => 'required|string|max:255',
             'penerbit' => 'required|string|max:255',
@@ -140,6 +143,7 @@ class DB_BookController extends Controller
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
             'judul.required' => 'Judul buku wajib diisi.',
+            'judul.unique' => 'Judul buku sudah ada.',
             'judul.string' => 'Judul buku harus berupa teks.',
             'judul.max' => 'Judul buku tidak boleh lebih dari 255 karakter.',
             'kode_buku.required' => 'Kode buku wajib diisi.',
@@ -208,9 +212,11 @@ class DB_BookController extends Controller
             Storage::disk('public')->delete($book->gambar);
         }
 
-        $book->categories()->detach();
-        $book->bookLoans()->delete(); // Hapus semua peminjaman terkait
-        $book->delete();
+        // $book->categories()->detach();
+        // $book->bookLoans()->delete(); // Hapus semua peminjaman terkait
+        $book->update([
+            'archived' => 1,
+        ]);
 
         return redirect()->route('books.index')
             ->with('success', 'Buku berhasil dihapus.');
