@@ -14,7 +14,7 @@
         display: flex;
         align-items: center;
     }
-    
+
     .login-container {
         background: #fff;
         border-radius: 15px;
@@ -22,7 +22,7 @@
         box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         padding: 0;
     }
-    
+
     .login-image {
         background: url('{{ asset('perpustakaan.jpeg') }}');
         background-size: cover;
@@ -30,7 +30,7 @@
         min-height: 400px;
         position: relative;
     }
-    
+
     .login-image::before {
         content: '';
         position: absolute;
@@ -40,7 +40,7 @@
         height: 100%;
         background: rgba(13, 110, 253, 0.75);
     }
-    
+
     .login-image-content {
         position: relative;
         z-index: 1;
@@ -51,52 +51,52 @@
         flex-direction: column;
         justify-content: center;
     }
-    
+
     .login-image-content h3 {
         font-size: 28px;
         font-weight: 700;
         margin-bottom: 20px;
         color: #fff;
     }
-    
+
     .login-image-content p {
         font-size: 16px;
         margin-bottom: 30px;
         line-height: 1.7;
     }
-    
+
     .login-form-container {
         padding: 50px 40px;
     }
-    
+
     .login-heading {
         text-align: center;
         margin-bottom: 40px;
     }
-    
+
     .login-heading h2 {
         font-size: 32px;
         font-weight: 700;
         color: #333;
         margin-bottom: 10px;
     }
-    
+
     .login-heading p {
         color: #666;
         font-size: 16px;
     }
-    
+
     .form-group {
         margin-bottom: 25px;
     }
-    
+
     .form-group label {
         font-weight: 600;
         color: #555;
         margin-bottom: 10px;
         display: block;
     }
-    
+
     .form-control {
         height: 50px;
         border-radius: 10px;
@@ -105,12 +105,12 @@
         font-size: 16px;
         transition: all 0.3s;
     }
-    
+
     .form-control:focus {
         border-color: #0d6efd;
         box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
     }
-    
+
     .btn-login {
         width: 100%;
         height: 50px;
@@ -123,74 +123,74 @@
         border: none;
         margin-top: 10px;
     }
-    
+
     .btn-login:hover {
         background: #0a58ca;
         transform: translateY(-3px);
         box-shadow: 0 10px 20px rgba(13, 110, 253, 0.2);
     }
-    
+
     .remember-me {
         display: flex;
         align-items: center;
         margin-bottom: 20px;
     }
-    
+
     .remember-me input {
         margin-right: 10px;
     }
-    
+
     .remember-me label {
         margin: 0;
         color: #555;
         font-size: 14px;
     }
-    
+
     .login-footer {
         margin-top: 30px;
         text-align: center;
     }
-    
+
     .login-footer a {
         color: #0d6efd;
         font-weight: 600;
         transition: all 0.3s;
     }
-    
+
     .login-footer a:hover {
         text-decoration: underline;
     }
-    
+
     .invalid-feedback {
         color: #dc3545;
         font-size: 14px;
         margin-top: 5px;
     }
-    
+
     .feature-list {
         list-style: none;
         padding: 0;
         margin: 0;
     }
-    
+
     .feature-list li {
         padding: 8px 0;
         display: flex;
         align-items: center;
     }
-    
+
     .feature-list li i {
         margin-right: 10px;
         color: #fff;
         font-size: 18px;
     }
-    
+
     @media (max-width: 991px) {
         .login-image {
             min-height: 300px;
         }
     }
-    
+
     @media (max-width: 767px) {
         .login-form-container {
             padding: 40px 20px;
@@ -209,7 +209,7 @@
                         <div class="login-image-content">
                             <h3>Selamat Datang di Perpustakaan SMP Muhammadiyah</h3>
                             <p style="color: white;">Akses ribuan koleksi buku digital dan cetak untuk mendukung pembelajaran dan literasi.</p>
-                            
+
                             <ul class="feature-list">
                                 <li><i class="fa fa-check-circle"></i> Peminjaman buku cepat dan mudah</li>
                                 <li><i class="fa fa-check-circle"></i> Akses katalog buku lengkap</li>
@@ -218,23 +218,23 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-7 login-form-container">
                         <div class="login-heading">
                             <h2>Masuk</h2>
                             <p>Masukkan informasi login untuk melanjutkan</p>
                         </div>
-                        
+
                         <!-- Session Status -->
                         @if (session('status'))
                             <div class="alert alert-info" role="alert">
                                 {{ session('status') }}
                             </div>
                         @endif
-                        
+
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
-                            
+
                             <!-- Email or NIS -->
                             <div class="form-group">
                                 <label for="identity">Email atau NIS</label>
@@ -245,28 +245,42 @@
                                     </span>
                                 @enderror
                             </div>
-                            
+
                             <!-- Password -->
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <div class="position-relative">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" style="padding-right: 50px;">
+                                    <button type="button"
+                                            onclick="togglePasswordLogin('password')"
+                                            class="btn btn-link position-absolute"
+                                            style="right: 10px; top: 50%; transform: translateY(-50%); border: none; background: none; padding: 0; color: #666;">
+                                        <svg id="eye-icon-password" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                        </svg>
+                                        <svg id="eye-off-icon-password" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path>
+                                        </svg>
+                                    </button>
+                                </div>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                            
+
                             <!-- Remember Me -->
                             <div class="remember-me">
                                 <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                 <label for="remember">Ingat saya</label>
                             </div>
-                            
+
                             <button type="submit" class="btn-login">
                                 Masuk
                             </button>
-                            
+
                             <div class="login-footer">
                                 @if (Route::has('password.request'))
                                     <a href="{{ route('password.request') }}">
@@ -281,4 +295,23 @@
         </div>
     </div>
 </section>
+
+<script>
+function togglePasswordLogin(fieldId) {
+    const passwordField = document.getElementById(fieldId);
+    const eyeIcon = document.getElementById(`eye-icon-${fieldId}`);
+    const eyeOffIcon = document.getElementById(`eye-off-icon-${fieldId}`);
+
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        eyeIcon.style.display = 'none';
+        eyeOffIcon.style.display = 'block';
+    } else {
+        passwordField.type = 'password';
+        eyeIcon.style.display = 'block';
+        eyeOffIcon.style.display = 'none';
+    }
+}
+</script>
+
 @endsection

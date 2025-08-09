@@ -50,34 +50,34 @@
 <body>
     <div class="container">
         <h1>Password Berhasil Diubah</h1>
-        
+
         <p>Halo {{ $user->name }},</p>
-        
+
         <div class="alert">
             <strong>Password Anda telah berhasil diubah!</strong>
         </div>
-        
+
         <p>Kami ingin memberitahukan bahwa password akun Anda di sistem Perpustakaan Muhammadiyah Karangasem telah berhasil diubah pada:</p>
-        
+
         <div class="info-box">
             <strong>Waktu:</strong> {{ now()->format('d F Y, H:i:s') }} WIB<br>
             <strong>Email:</strong> {{ $user->email }}
         </div>
-        
+
         <p>Jika Anda tidak melakukan perubahan password ini, segera hubungi administrator sistem untuk mengamankan akun Anda.</p>
-        
+
         <p><strong>Tips Keamanan:</strong></p>
         <ul>
             <li>Jangan bagikan password Anda kepada siapapun</li>
             <li>Gunakan password yang kuat dan unik</li>
             <li>Logout dari semua perangkat jika diperlukan</li>
         </ul>
-        
+
         <p>Terima kasih telah menjaga keamanan akun Anda.</p>
-        
+
         <p>Salam,<br>
         <strong>Tim Perpustakaan Muhammadiyah Karangasem</strong></p>
-        
+
         <div class="footer">
             <p>Email ini dikirim secara otomatis, mohon tidak membalas email ini.</p>
             <p>© {{ date('Y') }} Perpustakaan Muhammadiyah Karangasem. All rights reserved.</p>
