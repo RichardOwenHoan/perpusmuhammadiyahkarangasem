@@ -181,16 +181,12 @@ class LoanController extends Controller
             'to' => 'required|date',
         ]);
 
-        $loans = \App\Models\BookLoan::with(['user', 'book'])
-            ->whereBetween('loan_date', [$request->from, $request->to])
-            ->get();
+        $from = $request->from;
+        $to = $request->to;
 
-        $pdf = Pdf::loadView('exports.loans_pdf', [
-            'loans' => $loans,
-            'from' => $request->from,
-            'to' => $request->to,
-        ]);
+        // Format filename with date range
+        $filename = 'daftar_peminjaman_' . Carbon::parse($from)->format('Y-m-d') . '_to_' . Carbon::parse($to)->format('Y-m-d') . '.xlsx';
 
-        return $pdf->download('daftar_peminjaman.pdf');
+        return Excel::download(new LoanExport($from, $to), $filename);
     }
 }
