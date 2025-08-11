@@ -3,9 +3,7 @@
 namespace App\Exports;
 
 use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\WithEvents;
@@ -16,7 +14,7 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Font;
 
-class LoanExport implements FromCollection, WithMapping, WithStyles, WithTitle, WithEvents
+class LoanExport implements FromArray, WithStyles, WithTitle, WithEvents
 {
     protected $from;
     protected $to;
@@ -32,23 +30,33 @@ class LoanExport implements FromCollection, WithMapping, WithStyles, WithTitle, 
             ->get();
     }
 
-    public function collection()
+    public function array(): array
     {
-        return $this->loans;
-    }
-
-    public function map($loan): array
-    {
-        static $counter = 1;
-        return [
-            $counter++,
-            $loan->book->judul ?? '-',
-            $loan->user->name ?? '-',
-            $loan->loan_date ? \Carbon\Carbon::parse($loan->loan_date)->format('d/m/Y') : '-',
-            $loan->actual_return_date ? \Carbon\Carbon::parse($loan->actual_return_date)->format('d/m/Y') : '-',
-            $loan->status_peminjaman ?? '-',
-            'Rp ' . number_format($loan->denda, 0, ',', '.'),
-        ];
+        // Create the complete array structure including headers and data
+        $data = [];
+        
+        // Add empty rows for headers (will be filled in AfterSheet event)
+        for ($i = 0; $i < 11; $i++) {
+            $data[] = ['', '', '', '', '', '', ''];
+        }
+        
+        // Add table headers
+        $data[] = ['No', 'Judul Buku', 'Nama Peminjam', 'Tanggal Pinjam', 'Tanggal Dikembalikan', 'Status Peminjaman', 'Denda'];
+        
+        // Add data rows
+        foreach ($this->loans as $index => $loan) {
+            $data[] = [
+                $index + 1,
+                $loan->book->judul ?? '-',
+                $loan->user->name ?? '-',
+                $loan->loan_date ? \Carbon\Carbon::parse($loan->loan_date)->format('d/m/Y') : '-',
+                $loan->actual_return_date ? \Carbon\Carbon::parse($loan->actual_return_date)->format('d/m/Y') : '-',
+                $loan->status_peminjaman ?? '-',
+                'Rp ' . number_format($loan->denda, 0, ',', '.')
+            ];
+        }
+        
+        return $data;
     }
 
     public function title(): string
@@ -75,9 +83,6 @@ class LoanExport implements FromCollection, WithMapping, WithStyles, WithTitle, 
                 $sheet->getColumnDimension('E')->setWidth(15);
                 $sheet->getColumnDimension('F')->setWidth(18);
                 $sheet->getColumnDimension('G')->setWidth(15);
-
-                // Clear existing content
-                $sheet->getCell('A1')->setValue('');
 
                 // Header - School Name
                 $sheet->mergeCells('A1:G1');
@@ -111,9 +116,6 @@ class LoanExport implements FromCollection, WithMapping, WithStyles, WithTitle, 
                     'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER]
                 ]);
 
-                // Empty row
-                $sheet->getCell('A5')->setValue('');
-
                 // Report Title
                 $sheet->mergeCells('A6:G6');
                 $sheet->getCell('A6')->setValue('LAPORAN DAFTAR PEMINJAMAN BUKU');
@@ -132,9 +134,6 @@ class LoanExport implements FromCollection, WithMapping, WithStyles, WithTitle, 
                     'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER]
                 ]);
 
-                // Empty row
-                $sheet->getCell('A8')->setValue('');
-
                 // Summary Statistics
                 $totalBorrowed = $this->loans->count();
                 $totalReturned = $this->loans->where('status_peminjaman', 'dikembalikan')->count();
@@ -146,7 +145,6 @@ class LoanExport implements FromCollection, WithMapping, WithStyles, WithTitle, 
                     'alignment' => ['horizontal' => Alignment::HORIZONTAL_LEFT]
                 ]);
 
-                $sheet->mergeCells('D9:D9');
                 $sheet->getCell('D9')->setValue($totalBorrowed);
                 $sheet->getStyle('D9')->applyFromArray([
                     'font' => ['bold' => true],
@@ -161,7 +159,6 @@ class LoanExport implements FromCollection, WithMapping, WithStyles, WithTitle, 
                     'alignment' => ['horizontal' => Alignment::HORIZONTAL_LEFT]
                 ]);
 
-                $sheet->mergeCells('G9:G9');
                 $sheet->getCell('G9')->setValue($totalReturned);
                 $sheet->getStyle('G9')->applyFromArray([
                     'font' => ['bold' => true],
@@ -169,57 +166,36 @@ class LoanExport implements FromCollection, WithMapping, WithStyles, WithTitle, 
                     'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]]
                 ]);
 
-                // Empty row
-                $sheet->getCell('A10')->setValue('');
+                // Style table headers (row 12)
+                $sheet->getStyle('A12:G12')->applyFromArray([
+                    'font' => ['bold' => true],
+                    'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER, 'vertical' => Alignment::VERTICAL_CENTER],
+                    'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]],
+                    'fill' => [
+                        'fillType' => Fill::FILL_SOLID,
+                        'startColor' => ['rgb' => 'E6E6E6']
+                    ]
+                ]);
 
-                // Table Headers
-                $headers = ['No', 'Judul Buku', 'Nama Peminjam', 'Tanggal Pinjam', 'Tanggal Dikembalikan', 'Status Peminjaman', 'Denda'];
-                $row = 11;
+                // Style data rows (starting from row 13)
+                $dataStartRow = 13;
+                $totalDataRows = count($this->loans);
+                $lastDataRow = $dataStartRow + $totalDataRows - 1;
 
-                foreach ($headers as $col => $header) {
-                    $cell = chr(65 + $col) . $row;
-                    $sheet->getCell($cell)->setValue($header);
-                    $sheet->getStyle($cell)->applyFromArray([
-                        'font' => ['bold' => true],
-                        'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER, 'vertical' => Alignment::VERTICAL_CENTER],
+                if ($totalDataRows > 0) {
+                    // Apply borders to all data cells
+                    $sheet->getStyle('A' . $dataStartRow . ':G' . $lastDataRow)->applyFromArray([
                         'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]],
-                        'fill' => [
-                            'fillType' => Fill::FILL_SOLID,
-                            'startColor' => ['rgb' => 'E6E6E6']
-                        ]
+                        'alignment' => ['vertical' => Alignment::VERTICAL_CENTER]
                     ]);
-                }
 
-                // Data rows
-                $dataStartRow = 12;
-                foreach ($this->loans as $index => $loan) {
-                    $row = $dataStartRow + $index;
-                    $data = [
-                        $index + 1,
-                        $loan->book->judul ?? '-',
-                        $loan->user->name ?? '-',
-                        $loan->loan_date ? \Carbon\Carbon::parse($loan->loan_date)->format('d/m/Y') : '-',
-                        $loan->actual_return_date ? \Carbon\Carbon::parse($loan->actual_return_date)->format('d/m/Y') : '-',
-                        $loan->status_peminjaman ?? '-',
-                        'Rp ' . number_format($loan->denda, 0, ',', '.')
-                    ];
-
-                    foreach ($data as $col => $value) {
-                        $cell = chr(65 + $col) . $row;
-                        $sheet->getCell($cell)->setValue($value);
-                        $sheet->getStyle($cell)->applyFromArray([
-                            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]],
-                            'alignment' => [
-                                'horizontal' => $col == 0 ? Alignment::HORIZONTAL_CENTER :
-                                              ($col >= 3 && $col <= 6 ? Alignment::HORIZONTAL_CENTER : Alignment::HORIZONTAL_LEFT),
-                                'vertical' => Alignment::VERTICAL_CENTER
-                            ]
-                        ]);
-                    }
+                    // Center align specific columns (No, dates, status, denda)
+                    $sheet->getStyle('A' . $dataStartRow . ':A' . $lastDataRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+                    $sheet->getStyle('D' . $dataStartRow . ':G' . $lastDataRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
                 }
 
                 // Set row height for header
-                $sheet->getRowDimension('11')->setRowHeight(25);
+                $sheet->getRowDimension('12')->setRowHeight(25);
             }
         ];
     }
